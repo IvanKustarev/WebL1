@@ -2,10 +2,8 @@
 include "functions.php";
 
 if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
-    $start_time = microtime(true)*1000000;
-//    $start_time = gettimeofday(true);
+    $start_time = microtime(true) * 1000000;
     $dotInArea = checkDot();
-//    $phpWorkingTime = $finishTime - $start_time;
 }
 ?>
 <!DOCTYPE html>
@@ -14,12 +12,9 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
     <meta charset="UTF-8">
     <title>WebL1</title>
     <style>
-        .headStyle {
-            font-family: Serif;
-            color: rgb(253, 253, 253);
-            font-size: xxx-large;
-            font-weight: bold;
-        }
+
+
+        /*Common*/
 
         .centering {
             text-align: center;
@@ -28,37 +23,97 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
             margin: auto;
         }
 
+        .common {
+            background-color: rgb(76, 76, 76);
+            font-weight: bold;
+            color: lightgray;
+            font-family: Arial;
+        }
+
+        .invisible {
+            visibility: hidden;
+        }
+
+        .visible {
+            visibility: visible;
+            position: static;
+        }
+
+
+        /*Head*/
+
+        .headStyle {
+            font-family: Serif;
+            color: rgb(253, 253, 253);
+            font-size: xxx-large;
+            font-weight: bold;
+        }
+
+
+        /*MainLine*/
+
+        .mainLine {
+            border-color: black;
+        }
+
+        .mainLine:hover {
+            border-color: #E61B43;
+        }
+
+
+        /*Clock*/
+
         #clock {
             color: rgb(253, 253, 253);
             font-weight: bold;
             font-size: 30px;
         }
 
-        #exceptionField {
-            font-weight: normal;
-            color: #E61B43;
+
+        /*Blocks (graphic/answer, conditions, submit)*/
+
+        .interface-block {
+            border: 1px solid;
+            /*border-color: lightgray;*/
+            border-color: black;
+            border-radius: 15px;
+
+            margin: 10px;
+            padding: 5px;
         }
 
-        .clickedElement {
-            /*color: indigo;*/
-            /*border: solid;*/
-            /*!*border-color: black;*!*/
-            /*padding: 4px;*/
 
-            /*border: 1px solid; !* Параметры границы *!*/
-            /*padding: 6px;*/
-            /*font;*/
+        /*first block*/
+        /*requestAnswerTavle*/
+
+        #requestAnswer {
+            text-align: center;
+            width: 100%;
+            height: 90%;
+        }
+
+        .requestAnswerTableBlockLeft {
+            text-align: right;
+            padding-right: 10%;
+            width: 50%;
+        }
+        .requestAnswerTableBlockRight {
+            text-align: left;
+            padding-left: 10%;
+            width : 50%;
+        }
+
+
+        /*second block*/
+
+        .clickedElement {
             color: rgb(43, 149, 255);
-            background: #4D4D4D; /* Цвет фона */
-            /*padding: 0px; !* Поля вокруг текста *!*/
-            /*border-color: black;*/
+            background: #4D4D4D;
         }
 
         .clickedElement:hover {
             color: #E61B43;
-            /*border: 3px solid;*/
             cursor: pointer;
-            /*border-color: #E61B43;*/
             padding: 4px;
         }
 
@@ -85,38 +140,40 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
 
         }
 
-        #yTextField{
+        #yTextField {
             color: rgb(43, 149, 255);
             font-weight: bold;
+            text-align: center;
         }
 
-        #requestAnswer { /*по идентификатору*/
-            /*border: 1px solid;*/
-            /*border-color: #E61B43;*/
+        #yTextField:focus {
+            border: 1px solid;
+            border-color: darkmagenta;
         }
 
-        .mainLine {
-            border-color: black;
+        #yTextField::-webkit-input-placeholder {
+            color: lightgray;
+            text-align: center;
         }
 
-        .mainLine:hover {
+        #yTextField::-moz-placeholder {
+            color: rgb(253, 253, 253);
+        }
+
+        #yTextField:not(:placeholder-shown) {
             border-color: #E61B43;
         }
 
-        .invisible {
-            visibility: hidden;
+        .selectedText {
+            color: #E61B43;
         }
 
-        .visible {
-            visibility: visible;
-            position: static;
-        }
 
-        .common {
-            background-color: rgb(76, 76, 76);
-            font-weight: bold;
-            color: lightgray;
-            font-family: Arial;
+        /*submit*/
+
+        #exceptionField {
+            font-weight: normal;
+            color: #E61B43;
         }
 
         .fillingLocation {
@@ -124,30 +181,7 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
             height: 100%;
         }
 
-        .savedRequestsTableBorder {
-            border: 1px solid;
-            border-color: black;
-        }
-
-        .simpleText {
-            color: black;
-        }
-
-        .selectedText {
-            color: #E61B43;
-        }
-
-        .interface-block {
-            border: 1px solid;
-            /*border-color: lightgray;*/
-            border-color: black;
-            border-radius: 15px;
-
-            margin: 10px;
-            padding: 5px;
-        }
-
-        #submitDiv{
+        #submitDiv {
             border: 1px solid;
             border-color: rgb(43, 149, 255);
             border-radius: 15px;
@@ -155,37 +189,27 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
             padding: 5px;
         }
 
-        #submitDiv:hover{
+        #submitDiv:hover {
             border-color: #E61B43;
-        }
-
-        #yTextField {
-            color: rgb(43, 149, 255);
-            text-align: center;
-        }
-
-        #yTextField::-webkit-input-placeholder {
-            color: lightgray;
-        }
-
-        #yTextField::-moz-placeholder {
-            color: rgb(253, 253, 253);
-        }
-        #yTextField::-webkit-input-placeholder {
-            text-align:center;
         }
 
         #submitButton {
             background: #4D4D4D;
             border: 0px solid;
         }
-        #yTextField:not(:placeholder-shown){
-            border-color: #E61B43;
+
+
+        /*savedTable*/
+
+        .savedRequestsTableBorder {
+            border: 1px solid;
+            border-color: black;
         }
+
 
     </style>
 </head>
-<body class="common">
+<body class="common" style="color: #4D4D4D">
 <header id="header" class="headStyle centering">
     <div>Кустарев Иван Павлович P3215</div>
     <div>Вариант 15012</div>
@@ -195,7 +219,7 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
 
     <form id="submitForm" onsubmit="return checkBeforeSubmit()" action="index.php" method="post">
 
-        <table class="centering" width="550px">
+        <table class="centering common" width="500px">
             <tr>
                 <td>
                     <div id="clock">00:00:00</div>
@@ -204,40 +228,47 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
             <tr>
                 <td>
                     <div class="interface-block">
-                        <table class="centering fillingLocation">
-                            <?php
-                            if (isset($dotInArea)) {
-                                echo "
-                                                  <td width='50%'>
-                                                    <div>
-                                                        <img src='areas.png' alt='Problem with image loading!'>
-                                                    </div>
-                                                </td>
-                                                <td width='50%'>";
-                                echo "<div>Результат:</div>";
-                                echo "<table id='requestAnswer' class='centering'>";
-                                echo "<tr><td>Заданный R:</td><td><span class='answer' id='R'>" . $_POST['R'] . "</span></td></tr>";
-                                echo "<tr><td>Заданный X:</td><td><span class='answer' id='X'>" . $_POST['X'] . "</span></td></tr>";
-                                echo "<tr><td>Заданный Y:</td><td><span class='answer' id='Y'>" . $_POST['Y'] . "</span></td></tr>";
-                                if($dotInArea === "true"){
-                                    echo "<tr><td>Попала:</td><td><span class='answer' id='DotInArea'>" . "Да" . "</span></td></tr>";
-                                }else{
-                                    echo "<tr><td>Попала:</td><td><span class='answer' id='DotInArea'>" . "Нет" . "</span></td></tr>";
-                                }
-//                                echo "<tr><td>Время начала:</td><td><span class='answer' id='StartTime'>" . $start_time . "</span></td></tr>";
-                                $stop_time = microtime(true)*1000000;
-//                                echo "<tr><td>Время окончания:</td><td><span class='answer' id='FinishTime'>" .$stop_time. "</span></td></tr>";
-                                echo "<tr><td>Время работы:</td><td><span class='answer' id='PhpWorkingtime'>" . ($stop_time - $start_time)." мкс". "</span></td></tr>";
-                                echo "</table>";
-                                echo "</td>";
-                            } else {
-                                echo "<tr><td><img src='areas.png' alt='Problem with image loading!'></td></tr>";
-                            }
-                            ?>
-                        </table>
+                        <img src='areas.png' alt='Problem with image loading!'>
+
                     </div>
                 </td>
             </tr>
+
+            <tr>
+                <td>
+                    <?php if (isset($dotInArea)) { ?>
+                        <div class="interface-block" style="border-color: #E61B43">
+                            <table class="centering fillingLocation">
+                                <tr>
+                                    <td>
+                                        <div>Result:</div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                        <?php
+                                        echo "<table id='requestAnswer' class='centering'>";
+                                        echo "<tr><td class='requestAnswerTableBlockLeft'>R:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='R'>" . $_POST['R'] . "</span></td></tr>";
+                                        echo "<tr><td class='requestAnswerTableBlockLeft'>X:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='X'>" . $_POST['X'] . "</span></td></tr>";
+                                        echo "<tr><td class='requestAnswerTableBlockLeft'>Y:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='Y'>" . $_POST['Y'] . "</span></td></tr>";
+                                        if ($dotInArea === "true") {
+                                            echo "<tr><td class='requestAnswerTableBlockLeft'>Got:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='DotInArea'>" . "Yes" . "</span></td></tr>";
+                                        } else {
+                                            echo "<tr><td class='requestAnswerTableBlockLeft'>Got:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='DotInArea'>" . "No" . "</span></td></tr>";
+                                        }
+                                        $stop_time = microtime(true) * 1000000;
+                                        echo "<tr><td class='requestAnswerTableBlockLeft'>Work time:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='PhpWorkingtime'>" . ($stop_time - $start_time) . " mks" . "</span></td></tr>";
+                                        echo "</table>";
+
+                                        ?>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    <?php } ?>
+                </td>
+            </tr>
+
             <tr>
                 <td>
                     <div class="interface-block">
@@ -252,31 +283,36 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
                                         </tr>
                                         <tr>
                                             <td class="centering">
-                                <span class="clickedElement">
-                                    <input class="rRadio" type="radio" name="R" tabindex="1" placeholder="Параметр R"
-                                           value="1">
-                                    1
-                                </span>
                                                 <span class="clickedElement">
-                                    <input class="rRadio" type="radio" name="R" tabindex="1" placeholder="Параметр R"
-                                           value="1.5">
-                                    1.5
-                                </span>
+                                                     <input class="rRadio" type="radio" name="R" tabindex="1"
+                                                            placeholder="Параметр R"
+                                                            value="1">
+                                                    <span>1</span>
+                                                </span>
                                                 <span class="clickedElement">
-                                    <input class="rRadio" type="radio" name="R" tabindex="1" placeholder="Параметр R"
-                                           value="2">
-                                    2
-                                </span>
+                                                     <input class="rRadio" type="radio" name="R" tabindex="1"
+                                                            placeholder="Параметр R"
+                                                            value="1.5">
+                                                     <span>1.5</span>
+                                                </span>
                                                 <span class="clickedElement">
-                                    <input class="rRadio" type="radio" name="R" tabindex="1" placeholder="Параметр R"
-                                           value="2.5">
-                                    2.5
-                                </span>
+                                                    <input class="rRadio" type="radio" name="R" tabindex="1"
+                                                           placeholder="Параметр R"
+                                                           value="2">
+                                                    <span>2</span>
+                                                </span>
                                                 <span class="clickedElement">
-                                    <input class="rRadio" type="radio" name="R" tabindex="1" placeholder="Параметр R"
-                                           value="3">
-                                    3
-                                </span>
+                                                    <input class="rRadio" type="radio" name="R" tabindex="1"
+                                                           placeholder="Параметр R"
+                                                           value="2.5">
+                                                    <span>2.5</span>
+                                                </span>
+                                                <span class="clickedElement">
+                                                    <input class="rRadio" type="radio" name="R" tabindex="1"
+                                                           placeholder="Параметр R"
+                                                           value="3">
+                                                    <span>3</span>
+                                                </span>
                                             </td>
                                         </tr>
                                     </table>
@@ -293,51 +329,60 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
                                         </tr>
                                         <tr>
                                             <td>
-                                <span class="clickedElement">
-                        <input class="xCheckbox" type="checkbox" name="X" tabindex="2" placeholder="Параметр X"
-                               value="-2">
-                        -2
-                    </span>
                                                 <span class="clickedElement">
-                        <input class="xCheckbox" type="checkbox" name="X" tabindex="2" placeholder="Параметр X"
-                               value="-1.5">
-                        -1.5
-                    </span>
+                                                    <input class="xCheckbox" type="checkbox" name="X" tabindex="2"
+                                                           placeholder="Параметр X"
+                                                           value="-2">
+                                                    <span>-2</span>
+                                                </span>
                                                 <span class="clickedElement">
-                        <input class="xCheckbox" type="checkbox" name="X" tabindex="2" placeholder="Параметр X"
-                               value="-1">
-                        -1
-                    </span>
+                                                    <input class="xCheckbox" type="checkbox" name="X" tabindex="2"
+                                                           placeholder="Параметр X"
+                                                           value="-1.5">
+                                                    <span>-1.5</span>
+                                                </span>
                                                 <span class="clickedElement">
-                        <input class="xCheckbox" type="checkbox" name="X" tabindex="2" placeholder="Параметр X"
-                               value="-0.5">
-                        -0.5
-                    </span>
+                                                    <input class="xCheckbox" type="checkbox" name="X" tabindex="2"
+                                                           placeholder="Параметр X"
+                                                           value="-1">
+                                                    <span>-1</span>
+                                                </span>
                                                 <span class="clickedElement">
-                        <input class="xCheckbox" type="checkbox" name="X" tabindex="2" placeholder="Параметр X"
-                               value="0">
-                        0
-                    </span>
+                                                    <input class="xCheckbox" type="checkbox" name="X" tabindex="2"
+                                                           placeholder="Параметр X"
+                                                           value="-0.5">
+                                                        <span>-0.5</span>
+                                                </span>
                                                 <span class="clickedElement">
-                        <input class="xCheckbox" type="checkbox" name="X" tabindex="2" placeholder="Параметр X"
-                               value="0.5">
-                        0.5
-                    </span>
+                                                    <input class="xCheckbox" type="checkbox" name="X" tabindex="2"
+                                                           placeholder="Параметр X"
+                                                           value="0">
+                                                    <span>0</span>
+                                                </span>
                                                 <span class="clickedElement">
-                        <input class="xCheckbox" type="checkbox" name="X" tabindex="2" placeholder="Параметр X"
-                               value="1">
-                        1
-                    </span>
+                                                    <input class="xCheckbox" type="checkbox" name="X" tabindex="2"
+                                                           placeholder="Параметр X"
+                                                           value="0.5">
+                                                    <span>0.5</span>
+                                                </span>
                                                 <span class="clickedElement">
-                        <input class="xCheckbox" type="checkbox" name="X" tabindex="2" placeholder="Параметр X"
-                               value="1.5">
-                        1.5
-                    </span>
+                                                    <input class="xCheckbox" type="checkbox" name="X" tabindex="2"
+                                                           placeholder="Параметр X"
+                                                           value="1">
+                                                    <span>1</span>
+                                                </span>
                                                 <span class="clickedElement">
-                        <input class="xCheckbox" type="checkbox" name="X" tabindex="2" placeholder="Параметр X"
-                               value="2">
-                        2
-                    </span>
+                                                    <input class="xCheckbox" type="checkbox" name="X" tabindex="2"
+                                                           placeholder="Параметр X"
+                                                           value="1.5">
+                                                    <span>1.5</span>
+                                                </span>
+                                                <span class="clickedElement">
+                                                    <input class="xCheckbox" type="checkbox" name="X" tabindex="2"
+                                                           placeholder="Параметр X"
+                                                           value="2">
+                                                    <span>2</span>
+                                                </span>
                                             </td>
                                         </tr>
                                     </table>
@@ -399,6 +444,7 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
                 echo "<tr><td>";
                 echo "<table id='savedRequestsTable' class='centering fillingLocation savedRequestsTableBorder'>";
                 echo "<tr><td class='savedRequestsTableBorder'>X</td><td class='savedRequestsTableBorder'>Y</td><td class='savedRequestsTableBorder'>R</td><td class='savedRequestsTableBorder'>Попала</td><!--<td class='savedRequestsTableBorder'>Время начала</td><td class='savedRequestsTableBorder'>Время окончания</td>--><td class='savedRequestsTableBorder'>Время выполнения</td></tr>";
+
                 $savedRequests = $_POST['savedRequests'];
                 $savedRequests = explode(";", $savedRequests);
                 for ($i = 0; $i < count($savedRequests); $i++) {
@@ -413,18 +459,10 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
                 echo "</tr></td>";
             }
             ?>
-
-            <!--            echo "<tr><td>Заданный X:</td><td><span class='answer' id='X'>" . $_POST['X'] . "</span></td></tr>";-->
-            <!--            echo "<tr><td>Заданный Y:</td><td><span class='answer' id='Y'>" . $_POST['Y'] . "</span></td></tr>";-->
-            <!--            echo "<tr><td>Заданный R:</td><td><span class='answer' id='R'>" . $_POST['R'] . "</span></td></tr>";-->
-            <!--            echo "<tr><td>Попала:</td><td><span class='answer' id='DotInArea'>" . $dotInArea . "</span></td></tr>";-->
-            <!--            echo "<tr><td>Время начала:</td><td><span class='answer' id='StartTime'>" . $start_time . "</span></td></tr>";-->
-            <!--            echo "<tr><td>Время окончания:</td><td><span class='answer' id='FinishTime'>" ./*. $finishTime*/time() . "</span></td></tr>";-->
-            <!--            echo "<tr><td>Время работы:</td><td><span class='answer' id='PhpWorkingtime'>" . time()-$start_time . "</span></td></tr>";-->
-            <!--            echo "</table>";-->
             <tr>
                 <td>
-                    <img src="https://se.ifmo.ru/o/helios-theme/images/company_logo.png" alt="Здесь должна быть уточка ВТ">
+                    <img src="https://se.ifmo.ru/o/helios-theme/images/company_logo.png"
+                         alt="Здесь должна быть уточка ВТ">
                 </td>
             </tr>
         </table>
