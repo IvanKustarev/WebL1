@@ -38,21 +38,13 @@ function startAnimation(){
         let kofL = document.documentElement.clientWidth / animationTime;
         mainLine.style.width = timePassed * kofL + 'px';
         let kofH = 1/animationTime;
-        header.style.color = 'rgba(230, 27, 67, ' + kofH*timePassed + ')';
+        // let rgb = header.style.opacity;
+        // rgb.substring(5, )
+        // console.log(rgb);
+        // header.style.color = 'rgba(230, 27, 67, ' + kofH*timePassed + ')';
+        header.style.opacity = kofH*timePassed;
     }
 }
-//
-// function invisibleMain(){
-//     let main = document.getElementById("main");
-//     for(let i =0; i<main.classList.length; i++){
-//         main.classList.remove("invisible");
-//         main.classList.add("visible");
-//     }
-//     console.log("ttt");
-//     for (let mainClass of main.classList){
-//         console.log(mainClass);
-//     }
-// }
 
 window.onload = function(){
     window.setInterval(function(){
@@ -63,13 +55,15 @@ window.onload = function(){
 };
 
 function checkBeforeSubmit(){
+
+    document.getElementById("exceptionField").innerText = "";
+
     let rAllRight = checkIsRSelected();
     let xAllRight = isSelectedOneXCheckbox();
     let yAllRight = checkYParameter();
 
-    addLastRequestsParameters();
-
     if(rAllRight && xAllRight && yAllRight){
+        addLastRequestsParameters();
         return true;
     }
     else {
@@ -78,7 +72,8 @@ function checkBeforeSubmit(){
 }
 
 function addLastRequestsParameters(){
-    let form = document.documentElement.getElementsByClassName("submitForm")[0];
+    // let form = document.documentElement.getElementsByClassName("submitForm")[0];
+    let form = document.getElementById("submitForm");
     let input = document.createElement('input');
     let inputValue = "";
 
@@ -127,8 +122,13 @@ function checkIsRSelected(){
             break;
         }
     }
+    document.getElementById("rTitle").classList.remove("selectedText");
+    document.getElementById("rTitle").classList.add("simpleText");
     if(!checked){
-        alert("Надо выбрать параметр R");
+        let exceptionField = document.getElementById("exceptionField");
+        exceptionField.innerText = exceptionField.innerText + "Надо выбрать параметр R \n";
+        document.getElementById("rTitle").classList.add("selectedText");
+        // alert("Надо выбрать параметр R");
         return false;
     }
     else {
@@ -137,17 +137,29 @@ function checkIsRSelected(){
 }
 
 function checkYParameter(){
-    let yTextField = document.documentElement.getElementsByClassName("yTextField")[0];
+    let yTextField = document.getElementById("yTextField");
+    document.getElementById("yTitle").classList.remove("selectedText");
+    document.getElementById("yTitle").classList.add("simpleText");
     if(yTextField.value === ""){
-        alert("Необходимо задать параметр Y");
+        // alert("Необходимо задать параметр Y");
+        let exceptionField = document.getElementById("exceptionField");
+        exceptionField.innerText = exceptionField.innerText + "Необходимо задать параметр Y \n";
+        document.getElementById("yTitle").classList.add("selectedText");
+
         return false;
     }
     if(isNaN(parseFloat(yTextField.value))){
-        alert("Параметр Y должен являться числом");
+        // alert("Параметр Y должен являться числом");
+        let exceptionField = document.getElementById("exceptionField");
+        exceptionField.innerText = exceptionField.innerText + "Параметр Y должен являться числом \n";
+        document.getElementById("yTitle").classList.add("selectedText");
         return false;
     }
     if(!(-3 < parseFloat(yTextField.value) && parseFloat(yTextField.value) < 3)){
-        alert("Параметр Y должен быть в диапазоне (-3;3)");
+        // alert("Параметр Y должен быть в диапазоне (-3;3)");
+        let exceptionField = document.getElementById("exceptionField");
+        exceptionField.innerText = exceptionField.innerText + "Параметр Y должен быть в диапазоне (-3;3) \n";
+        document.getElementById("yTitle").classList.add("selectedText");
         return false;
     }
     return true;
@@ -162,15 +174,23 @@ function isSelectedOneXCheckbox() {
             checkboxCounter++;
         }
     }
+    document.getElementById("xTitle").classList.remove("selectedText");
+    document.getElementById("xTitle").classList.add("simpleText");
     if(checkboxCounter > 1){
-        alert("Выбирите только один X");
+        // alert("Выбирите только один X");
+        let exceptionField = document.getElementById("exceptionField");
+        exceptionField.innerText = exceptionField.innerText + "Выбирите только один X \n";
+        document.getElementById("xTitle").classList.add("selectedText");
         for (let checkbox of checkboxes){
             checkbox.checked = false;
         }
         return false;
     }else {
         if(checkboxCounter === 0){
-            alert("Выбирите один X");
+            // alert("Выбирите один X");
+            let exceptionField = document.getElementById("exceptionField");
+            exceptionField.innerText = exceptionField.innerText + "Выбирите один X \n";
+            document.getElementById("xTitle").classList.add("selectedText");
             return false;
         }else {
             return true;
