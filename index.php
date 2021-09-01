@@ -18,8 +18,6 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
 
         .centering {
             text-align: center;
-            /*margin-left: auto;*/
-            /*margin-right: auto;*/
             margin: auto;
         }
 
@@ -31,7 +29,6 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
         }
 
         body {
-            /*style="color: #4D4D4D"*/
             background-color: rgb(76, 76, 76);
             font-weight: bold;
             color: lightgray;
@@ -46,6 +43,11 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
         .visible {
             visibility: visible;
             position: static;
+        }
+
+        .fillingLocation {
+            width: 100%;
+            height: 100%;
         }
 
 
@@ -78,12 +80,15 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
             font-size: 30px;
         }
 
+        /*main table*/
+        #mainTable {  /*наследование*/
+            width: 500px;
+        }
 
         /*Blocks (graphic/answer, conditions, submit)*/
 
         .interface-block {
             border: 1px solid;
-            /*border-color: lightgray;*/
             border-color: black;
             border-radius: 15px;
 
@@ -116,7 +121,7 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
 
         /*second block*/
 
-        .clickedElement {
+        .clickedElement {  /*каскадирование*/
             color: rgb(43, 149, 255);
             background: #4D4D4D;
         }
@@ -213,11 +218,6 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
             color: #E61B43;
         }
 
-        .fillingLocation {
-            width: 100%;
-            height: 100%;
-        }
-
         #submitDiv {
             border: 1px solid;
             border-color: rgb(43, 149, 255);
@@ -256,7 +256,7 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
 
     <form id="submitForm" onsubmit="return checkBeforeSubmit()" action="index.php" method="post">
 
-        <table class="centering common" width="500px">
+        <table id="mainTable" class="centering common"">
             <tr>
                 <td>
                     <div id="clock">00:00:00</div>
