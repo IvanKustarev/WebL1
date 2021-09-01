@@ -7,7 +7,7 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
 }
 ?>
 <!DOCTYPE html>
-<html lang="en" <!--style="background-color: #4D4D4D"-->
+<html lang="ru"
 <head>
     <meta charset="UTF-8">
     <title>WebL1</title>
@@ -27,6 +27,15 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
             background-color: rgb(76, 76, 76);
             font-weight: bold;
             color: lightgray;
+            font-family: Arial;
+        }
+
+        body {
+            /*style="color: #4D4D4D"*/
+            background-color: rgb(76, 76, 76);
+            font-weight: bold;
+            color: lightgray;
+            color: #4D4D4D;
             font-family: Arial;
         }
 
@@ -97,10 +106,11 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
             padding-right: 10%;
             width: 50%;
         }
+
         .requestAnswerTableBlockRight {
             text-align: left;
             padding-left: 10%;
-            width : 50%;
+            width: 50%;
         }
 
 
@@ -166,6 +176,33 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
 
         .selectedText {
             color: #E61B43;
+        }
+
+        #rPadding {
+            text-align: left;
+            padding-left: 117px;
+        }
+        #rPadding:hover {
+            text-align: left;
+            padding-left: 113px;
+        }
+
+        #xPadding {
+            text-align: left;
+            padding-left: 30px;
+        }
+        #xPadding:hover {
+            text-align: left;
+            padding-left: 26px;
+        }
+
+        #yPadding {
+            text-align: left;
+            padding-left: 130px;
+        }
+        #yPadding:hover {
+            text-align: left;
+            padding-left: 126px;
         }
 
 
@@ -241,7 +278,7 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
                             <table class="centering fillingLocation">
                                 <tr>
                                     <td>
-                                        <div>Result:</div>
+                                        <div>Результат:</div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -252,14 +289,13 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
                                         echo "<tr><td class='requestAnswerTableBlockLeft'>X:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='X'>" . $_POST['X'] . "</span></td></tr>";
                                         echo "<tr><td class='requestAnswerTableBlockLeft'>Y:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='Y'>" . $_POST['Y'] . "</span></td></tr>";
                                         if ($dotInArea === "true") {
-                                            echo "<tr><td class='requestAnswerTableBlockLeft'>Got:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='DotInArea'>" . "Yes" . "</span></td></tr>";
+                                            echo "<tr><td class='requestAnswerTableBlockLeft'>Попала:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='DotInArea'>" . "Да" . "</span></td></tr>";
                                         } else {
-                                            echo "<tr><td class='requestAnswerTableBlockLeft'>Got:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='DotInArea'>" . "No" . "</span></td></tr>";
+                                            echo "<tr><td class='requestAnswerTableBlockLeft'>Попала:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='DotInArea'>" . "Нет" . "</span></td></tr>";
                                         }
                                         $stop_time = microtime(true) * 1000000;
-                                        echo "<tr><td class='requestAnswerTableBlockLeft'>Work time:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='PhpWorkingtime'>" . ($stop_time - $start_time) . " mks" . "</span></td></tr>";
+                                        echo "<tr><td class='requestAnswerTableBlockLeft'>Время работы:</td><td class='requestAnswerTableBlockRight'><span class='answer' id='PhpWorkingtime'>" . ($stop_time - $start_time) . " мкс" . "</span></td></tr>";
                                         echo "</table>";
-
                                         ?>
                                     </td>
                                 </tr>
@@ -282,7 +318,8 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td class="centering">
+                                            <td id="rPadding">
+<!--                                                <span style="border: 1px solid; padding-left: 10px">-->
                                                 <span class="clickedElement">
                                                      <input class="rRadio" type="radio" name="R" tabindex="1"
                                                             placeholder="Параметр R"
@@ -312,6 +349,7 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
                                                            placeholder="Параметр R"
                                                            value="3">
                                                     <span>3</span>
+<!--                                                </span>-->
                                                 </span>
                                             </td>
                                         </tr>
@@ -328,7 +366,7 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>
+                                            <td id="xPadding">
                                                 <span class="clickedElement">
                                                     <input class="xCheckbox" type="checkbox" name="X" tabindex="2"
                                                            placeholder="Параметр X"
@@ -398,7 +436,7 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
                                             </td>
                                         </tr>
                                         <tr>
-                                            <td>
+                                            <td id="yPadding">
                                                 <input id="yTextField" class="selectingAreas" type="text" name="Y"
                                                        tabindex="3"
                                                        placeholder="(-3;3)">
