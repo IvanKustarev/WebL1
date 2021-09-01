@@ -60,6 +60,24 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
             font-weight: bold;
         }
 
+        /*#header{*/
+        /*    display: block;*/
+        /*    text-decoration: none;*/
+        /*}*/
+
+        #header::after{
+            content: "";
+            display: block;
+            width: 100%;
+            height: 1px;
+            transform: scaleX(0);
+            background-color: #E61B43;
+            transition: all 1s;
+        }
+
+        #header:hover::after{
+            transform: scaleX(1);
+        }
 
         /*MainLine*/
 
@@ -250,7 +268,7 @@ if (isset($_POST['R']) && isset($_POST['X']) && isset($_POST['Y'])) {
 <header id="header" class="headStyle centering">
     <div>Кустарев Иван Павлович P3215</div>
     <div>Вариант 15012</div>
-    <hr id="mainLine" class="mainLine">
+<!--    <hr id="mainLine" class="mainLine">-->
 </header>
 <main id="main" class="invisible">
 

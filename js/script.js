@@ -62,7 +62,7 @@ function makeMainVisible() {
 }
 
 function startAnimation() {
-    let mainLine = document.documentElement.getElementsByClassName("mainLine")[0];
+    // let mainLine = document.documentElement.getElementsByClassName("mainLine")[0];
     let header = document.getElementById("header");
     let start = Date.now();
     let animationTime = 1000;
@@ -71,7 +71,7 @@ function startAnimation() {
 
         if (timePassed >= 1000) {
             clearInterval(timer);
-            mainLine.style.width = "";
+            // mainLine.style.width = "";
             makeMainVisible();
             return;
         }
@@ -80,13 +80,9 @@ function startAnimation() {
     }, 20);
 
     function draw(timePassed) {
-        let kofL = document.documentElement.clientWidth / animationTime;
-        mainLine.style.width = timePassed * kofL + 'px';
+        // let kofL = document.documentElement.clientWidth / animationTime;
+        // mainLine.style.width = timePassed * kofL + 'px';
         let kofH = 1 / animationTime;
-        // let rgb = header.style.opacity;
-        // rgb.substring(5, )
-        // console.log(rgb);
-        // header.style.color = 'rgba(230, 27, 67, ' + kofH*timePassed + ')';
         header.style.opacity = kofH * timePassed;
     }
 }
@@ -132,9 +128,6 @@ function addLastRequestsParameters(){
 }
 
 function saveLastRequestsParameters() {
-    // let form = document.documentElement.getElementsByClassName("submitForm")[0];
-    // let form = document.getElementById("submitForm");
-    // let input = document.createElement('input');
     let inputValue = "";
 
     if (!(document.getElementById("requestAnswer") === null)) {
@@ -164,14 +157,6 @@ function saveLastRequestsParameters() {
         inputValue = inputValue.replace(/.$/, "");
     }
 
-    // if (!(inputValue === "")) {
-    //     input.setAttribute('name', 'savedRequests');
-    //     input.setAttribute('value', inputValue);
-    //     input.setAttribute('type', "hidden")
-    //     form.appendChild(input);
-    //
-    // }
-
     return inputValue;
 }
 
@@ -185,12 +170,10 @@ function checkIsRSelected() {
         }
     }
     document.getElementById("rTitle").classList.remove("selectedText");
-    // document.getElementById("rTitle").classList.add("simpleText");
     if (!checked) {
         let exceptionField = document.getElementById("exceptionField");
         exceptionField.innerText = exceptionField.innerText + "Надо выбрать параметр R \n";
         document.getElementById("rTitle").classList.add("selectedText");
-        // alert("Надо выбрать параметр R");
         return false;
     } else {
         return true;
